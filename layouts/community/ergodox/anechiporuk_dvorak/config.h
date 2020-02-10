@@ -1,0 +1,22 @@
+#ifndef CONFIG_ANECHIPORUK_H
+#define CONFIG_ANECHIPORUK_H
+
+#include QMK_KEYBOARD_CONFIG_H
+
+#undef NO_DEBUG
+#define NO_DEBUG
+#undef NO_PRINT
+#define NO_PRINT
+//#define FORCE_NKRO
+#define QMK_KEYS_PER_SCAN 4
+
+#define ONESHOT_TAP_TOGGLE 2
+#define ONESHOT_TIMEOUT 800
+
+#undef LEADER_TIMEOUT
+#define LEADER_TIMEOUT 1000
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 300
+
+#endif
