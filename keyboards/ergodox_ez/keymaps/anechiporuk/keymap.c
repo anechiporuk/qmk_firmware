@@ -18,15 +18,15 @@
 
 #define AUTO_SHIFT_MODIFIERS
 #define AUTO_SHIFT_NO_AUTO_REPEAT
+#define NO_AUTO_SHIFT_ALPHA
 
 #undef AUTO_SHIFT_TIMEOUT
-#define AUTO_SHIFT_TIMEOUT 250
+#define AUTO_SHIFT_TIMEOUT 175
 #undef TAPPING_TERM
 #define TAPPING_TERM 175
 
-
 enum custom_keycodes {
-  KC_P000 = SAFE_RANGE,
+    KC_P000 = SAFE_RANGE,
 };
 
 enum dvorak_keycodes {
@@ -99,14 +99,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *  |--------+------+------+------+------+------|      |                 |      |------+------+------+------+------+--------|
  *  | LShft( |   ;  |   Q  |   J  |   K  |   X  |      |                 |      |   B  |   M  |   W  |   V  |   Z  | RShft) |
  *  `--------+------+------+------+------+-------------'                 `-------------+------+------+------+------+--------'
- *    | LCtrl|      |      | LGui | LAlt |                                             |   {  |   }  |   [  |   ]  |      |
+ *    | LCtrl|      | LGui | LAlt | Media|                                             |   {  |   }  |   [  |   ]  |      |
  *    `----------------------------------'                                             `----------------------------------'
  *                                        ,-------------.               ,-------------.
  *                                        | Ins  |      |               |      |      |
  *                                 ,------|------|------|               |------+------+------.
  *                                 |      |      |      |               |      |      |      |
  *                                 | Spc  | Del  |------|               |------|BckSpc|Enter |
- *                                 |      |      | Media|               | Sym  |      |      |
+ *                                 |      |      | Sym  |               | Sym  |      |      |
  *                                 `--------------------'               `--------------------'
  */
 [BASE] = LAYOUT_ergodox_pretty(
@@ -114,19 +114,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,   DV_QUOT,  DV_COMM,  DV_DOT,   DV_P,     DV_Y,     XXXXXXX,         XXXXXXX,  DV_F,     DV_G,     DV_C,     DV_R,     DV_L,     DV_SLSH,
     QK_GESC,  DV_A,     DV_O,     DV_E,     DV_U,     DV_I,                                DV_D,     DV_H,     DV_T,     DV_N,     DV_S,     DV_MINS,
     SC_LSPO,  DV_SCLN,  DV_Q,     DV_J,     DV_K,     DV_X,     XXXXXXX,         XXXXXXX,  DV_B,     DV_M,     DV_W,     DV_V,     DV_Z,     SC_RSPC,
-    OSM_LCTL, XXXXXXX,  XXXXXXX,  OSM_LGUI, OSM_LALT,                                                DV_LCBR,  DV_RCBR,  DV_LBRC,  DV_RBRC,  XXXXXXX,
+    OSM_LCTL, XXXXXXX,  OSM_LGUI, OSM_LALT, OSL(Media),                                              DV_LCBR,  DV_RCBR,  DV_LBRC,  DV_RBRC,  XXXXXXX,
                                                       KC_INS,   XXXXXXX,         XXXXXXX,  XXXXXXX,
                                                                 XXXXXXX,         XXXXXXX,
-                                            KC_SPC,   KC_DEL,   OSL(Media),      OSL(Symbols),KC_BSPC,KC_ENT
+                                            KC_SPC,   KC_DEL,   OSL(Symbols),    OSL(Symbols),KC_BSPC,KC_ENT
 ),
 /* Symbols Layer
  *
  *  ,--------------------------------------------------.           ,--------------------------------------------------.
  *  |        |  F13 |  F14 |  F15 |  F16 |  F17 |  F18 |           |  F19 |  F20 |  F21 |  F22 |  F23 |  F24 |        |
  *  |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- *  |   `    |   1  |   2  |   3  |   4  |   5  |      |           |      |   6  |   7  |   8  |   9  |   0  |        |
+ *  |   `    |   !  |   @  |   #  |   $  |   %  |      |           |      |   ^  |   &  |   *  |   (  |   )  |        |
  *  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- *  |        |   !  |   @  |   #  |   $  |   %  |------|           |------|   ^  |   &  |   *  |   (  |   )  |        |
+ *  |        |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |        |
  *  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  *  |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  *  `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
@@ -142,8 +142,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [Symbols] = LAYOUT_ergodox_pretty(
     XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,        KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX,
-    KC_TILD,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,     XXXXXXX,       XXXXXXX,  KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     XXXXXXX,
-    _______,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,                           KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  XXXXXXX,
+    KC_TILD,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,       XXXXXXX,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  XXXXXXX,
+    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                              KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     XXXXXXX,
     _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
     _______,  _______,  _______,  _______,  _______,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
                                                       _______,  _______,       _______,  _______,
@@ -248,7 +248,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool check_mods(uint8_t mods) {
     uint8_t current_mods = get_mods();
-    if(!has_oneshot_mods_timed_out()) {
+    if (!has_oneshot_mods_timed_out()) {
         current_mods |= get_oneshot_mods();
     }
     return (current_mods & mods) == mods;
@@ -274,22 +274,22 @@ void clear_all_mods(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch(keycode) {
-    case KC_P000:
-        if (record->event.pressed) {
-            SEND_STRING(SS_TAP(X_KP_0) SS_TAP(X_KP_0) SS_TAP(X_KP_0));
-        }
-        return false;
-    case KC_ESC:
-        if(is_any_mods_or_layers()) {
-            clear_all_mods();
-            layer_off(Symbols);
-            layer_off(Media);
-            layer_off(NumPad);
-            reset_oneshot_layer();
+    switch (keycode) {
+        case KC_P000:
+            if (record->event.pressed) {
+                SEND_STRING(SS_TAP(X_KP_0) SS_TAP(X_KP_0) SS_TAP(X_KP_0));
+            }
             return false;
-        }
-        break;
+        case KC_ESC:
+            if (is_any_mods_or_layers()) {
+                clear_all_mods();
+                layer_off(Symbols);
+                layer_off(Media);
+                layer_off(NumPad);
+                reset_oneshot_layer();
+                return false;
+            }
+            break;
     }
     return true;
 }
@@ -301,12 +301,11 @@ void keyboard_post_init_user(void) {
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
     uint8_t mods = get_mods();
-    if(!has_oneshot_mods_timed_out())
-    {
+    if (!has_oneshot_mods_timed_out()) {
         mods |= get_oneshot_mods();
     }
 
-    if(mods & MOD_BIT(KC_LSFT)) {
+    if (mods & MOD_BIT(KC_LSFT)) {
         ergodox_right_led_1_set(LED_BRIGHTNESS_HI);
         ergodox_right_led_1_on();
     } else {
@@ -314,7 +313,7 @@ void matrix_scan_user(void) {
         ergodox_right_led_1_off();
     }
 
-    if(mods & MOD_BIT(KC_LALT)) {
+    if (mods & MOD_BIT(KC_LALT)) {
         ergodox_right_led_2_set(LED_BRIGHTNESS_HI);
         ergodox_right_led_2_on();
     } else {
@@ -322,12 +321,11 @@ void matrix_scan_user(void) {
         ergodox_right_led_2_off();
     }
 
-    if(mods & MOD_BIT(KC_LCTL)) {
+    if (mods & MOD_BIT(KC_LCTL)) {
         ergodox_right_led_3_set(LED_BRIGHTNESS_HI);
         ergodox_right_led_3_on();
     } else {
         ergodox_right_led_3_set(LED_BRIGHTNESS_LO);
         ergodox_right_led_3_off();
     }
-
 };
