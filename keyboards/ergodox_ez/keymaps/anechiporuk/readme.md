@@ -1,15 +1,19 @@
-# ErgoDox EZ Default Configuration
+# Description
 
-## Changelog
+## Considirations
+That configuration is based on a few facts from my usage patterns
+1) I use DVORAK layout
+2) I use both Ergodox and laptop keyboard
+3) I use both Windows and Linux
+4) I use other languages then English
+5) I use vim
+6) I couldn't get used to hjkl, I prefer reversed T for movements
+7) In Linux I use tiled window manager, so Win key is used extensively
 
-* Dec 2016:
-  * Added LED keys
-  * Refreshed layout graphic, comes from http://configure.ergodox-ez.com now.
-* Sep 22, 2016:
-  * Created a new key in layer 1 (bottom-corner key) that resets the EEPROM.
-* Feb 2, 2016 (V1.1): 
-  * Made the right-hand quote key double as Cmd/Win on hold. So you get ' when you tap it, " when you tap it with Shift, and Cmd or Win when you hold it. You can then use it as a modifier, or just press and hold it for a moment (and then let go) to send a single Cmd or Win keystroke (handy for opening the Start menu on Windows).
+## Consequences
+- (2) => I have to use QUERTY layout on ergodox and setup DVORAK in OS
+- (4) => I have to take other languages layouts into account, some symbol keys have letters on them
+- (2) => some keys are better to leave in default position, because I use them on laptop keyboard (Esc, Tab, Backspace, Ctrl)
 
-This is what we ship with out of the factory. :) The image says it all:
-
-![Default](https://i.imgur.com/Be53jH7.png)
+# What I tried
+- Autoshift, nice feature, but adds to much of a delay. But it's still nice for symbols
