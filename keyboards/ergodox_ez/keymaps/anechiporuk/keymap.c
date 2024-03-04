@@ -18,80 +18,70 @@
 #define OSL_SYST OSL(System)
 #define OSL_MEDI OSL(Media)
 
-#define HOME_SC LALT_T(DV_SCLN)
-#define HOME_Q LGUI_T(DV_Q)
-#define HOME_J LCTL_T(DV_J)
-#define HOME_K LSFT_T(DV_K)
-#define HOME_M RSFT_T(DV_M)
-#define HOME_W RSFT_T(DV_W)
-#define HOME_V RGUI_T(DV_V)
-#define HOME_Z LALT_T(DV_Z)
-
-
+#define HOME_A LALT_T(DV_A)
+#define HOME_O LGUI_T(DV_O)
+#define HOME_E LSFT_T(DV_E)
+#define HOME_U LCTL_T(DV_U)
+#define HOME_H RCTL_T(DV_H)
+#define HOME_T RSFT_T(DV_T)
+#define HOME_N RGUI_T(DV_N)
+#define HOME_S LALT_T(DV_S)
 
 #undef TAPPING_TERM
 #define TAPPING_TERM 175
 
-enum custom_keycodes {
-    KC_P000 = SAFE_RANGE,
-};
-
-
 enum layers {
     BASE,
-    Symbols,
-    Media,
-    NumPad,
+    NUM,
+    ARR,
     System,
 };
 
-tap_dance_action_t tap_dance_actions[] = {
-};
-
+tap_dance_action_t tap_dance_actions[] = {};
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* QWERTY Layer for DVORAK layout
  *
  *  ,--------------------------------------------------.                 ,--------------------------------------------------.
- *  |   GEsc |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                 |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |   \    |
+ *  |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |      |                 |      |  F7  |  F8  |  F9  |  F10 |  F11 |   F12  |
  *  |--------+------+------+------+------+-------------|                 |------+------+------+------+------+------+--------|
- *  |   Tab  |  '"  |  ,<  |  .>  |   P  |   Y  |  (   |                 |  )   |   F  |   G  |   C  |   R  |   L  |   /    |
+ *  |   Tab  |  '"  |  ,<  |  .>  |   P  |   Y  |      |                 |      |   F  |   G  |   C  |   R  |   L  |   /    |
  *  |--------+------+------+------+------+------|      |                 |      |------+------+------+------+------+--------|
- *  |    =   |   A  |   O  |   E  |   U  |   I  |------|                 |------|   D  |   H  |   T  |   N  |   S  |   -    |
+ *  |   Esc  | LA_A | LG_O | LC_E | LS_U |   I  |------|                 |------|   D  | RS_H | RC_T | RG_N | LA_S |   -    |
  *  |--------+------+------+------+------+------|      |                 |      |------+------+------+------+------+--------|
- *  | LShft  | LA_; | LG_Q | LC_J | LS_K |   X  |      |                 |      |   B  | RS_M | RC_W | RG_V | LA_Z | RShft  |
+ *  |    =   |   ;  |   Q  |   J  |   K  |   X  |      |                 |      |   B  |   M  |   W  |   V  |   Z  |   \    |
  *  `--------+------+------+------+------+-------------'                 `-------------+------+------+------+------+--------'
- *    | LCtrl|      |      |      | Media|                                             |   {  |   }  |   [  |   ]  | RCtrl|
+ *    |      |      |      |      |      |                                             |      |      |      |      |      |
  *    `----------------------------------'                                             `----------------------------------'
  *                                        ,-------------.               ,-------------.
- *                                        | Ins  |      |               |      |      |
+ *                                        |      |      |               |      |      |
  *                                 ,------|------|------|               |------+------+------.
  *                                 |      |      |      |               |      |      |      |
- *                                 | Spc  | Del  |------|               |------|BckSpc|Enter |
- *                                 |      |      | Sym  |               | Sym  |      |      |
+ *                                 | Spc  |      |------|               |------|BckSpc|Enter |
+ *                                 |      |      |      |               |      |      |      |
  *                                 `--------------------'               `--------------------'
  */
 [BASE] = LAYOUT_ergodox_pretty(
-    QK_GESC,  KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,           KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,   DV_BSLS,
-    KC_TAB,   DV_QUOT,  DV_COMM,  DV_DOT,   DV_P,     DV_Y,     DV_LPRN,         DV_RPRN,  DV_F,     DV_G,     DV_C,     DV_R,     DV_L,     DV_SLSH,
-    DV_EQL,   DV_A,     DV_O,     DV_E,     DV_U,     DV_I,                                DV_D,     DV_H,     DV_T,     DV_N,     DV_S,     DV_MINS,
-    OSM_LSFT, HOME_SC,  HOME_Q,   HOME_J,   HOME_K,   DV_X,     XXXXXXX,         XXXXXXX,  DV_B,     HOME_M,   HOME_W,   HOME_V,   HOME_Z,   OSM_RSFT,
-    OSM_LCTL, XXXXXXX,  XXXXXXX,  XXXXXXX,  OSL_MEDI,                                                DV_LCBR,  DV_RCBR,  DV_LBRC,  DV_RBRC,  OSM_RCTL,
-                                                      KC_INS,   XXXXXXX,         XXXXXXX,  XXXXXXX,
-                                                                XXXXXXX,         XXXXXXX,
-                                            KC_SPC,   KC_DEL,   OSL_SYMB,        OSL_SYMB,KC_BSPC,KC_ENT
+    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    XXXXXXX,        XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
+    KC_TAB,   DV_QUOT,  DV_COMM,  DV_DOT,   DV_P,     DV_Y,     XXXXXXX,        XXXXXXX,  DV_F,     DV_G,     DV_C,     DV_R,     DV_L,     DV_SLSH,
+    KC_ESC,   HOME_A,   HOME_O,   HOME_E,   HOME_U,   DV_I,                               DV_D,     HOME_H,   HOME_T,   HOME_N,   HOME_S,   DV_MINS,
+    DV_EQL,   DV_SCLN,  DV_Q,     DV_J,     DV_K,     DV_X,     XXXXXXX,        XXXXXXX,  DV_B,     DV_M,     DV_W,     DV_V,     DV_Z,     DV_BSLS,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                                      XXXXXXX,  XXXXXXX,        XXXXXXX,  XXXXXXX,
+                                                                XXXXXXX,        XXXXXXX,
+                                LT(NUM,KC_SPC),LT(ARR,XXXXXXX), XXXXXXX,        XXXXXXX,  LT(ARR,KC_BSPC),LT(NUM,KC_ENT)
 ),
 /* Symbols Layer
  *
  *  ,--------------------------------------------------.           ,--------------------------------------------------.
- *  |        |  F13 |  F14 |  F15 |  F16 |  F17 |  F18 |           |  F19 |  F20 |  F21 |  F22 |  F23 |  F24 |        |
+ *  |  F13   |  F14 |  F15 |  F16 |  F17 |  F18 |      |           |      |  F19 |  F20 |  F21 |  F22 |  F23 |   F24  |
  *  |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- *  |   `    |   !  |   @  |   #  |   $  |   %  |      |           |      |   ^  |   &  |   *  |   (  |   )  |        |
+ *  |        |   !  |   @  |   #  |   $  |   %  |      |           |      |   ^  |   &  |   *  |   (  |   )  |   ?    |
  *  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- *  |        |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |        |
+ *  |        |   1  |   2  |   3  |   4  |   5  |------|           |------|   6  |   7  |   8  |   9  |   0  |   _    |
  *  |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- *  |        | LAlt | LGui | LCtrl| LShft|      |      |           |      |      | RShft| RCtrl| RGui | LAlt |        |
+ *  |    +   |   :  |   `  |   ~  |   {  |   [  |      |           |      |   ]  |   }  |      |      |      |   |    |
  *  `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *    |      |      |      |      |      |                                       |      |      |      |      |      |
  *    `----------------------------------'                                       `----------------------------------'
@@ -99,30 +89,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        |      |      |         |      |      |
  *                                 ,------|------|------|         |------+------+------.
  *                                 |      |      |      |         |      |      |      |
- *                                 |      |      |------|         |------|      |      |
+ *                                 |      |      |------|         |------|  Del |      |
  *                                 |      |      |      |         |      |      |      |
  *                                 `--------------------'         `--------------------'
  */
-[Symbols] = LAYOUT_ergodox_pretty(
-    XXXXXXX,  KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,        KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,   XXXXXXX,
-    KC_TILD,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,       XXXXXXX,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  XXXXXXX,
-    _______,  KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                              KC_6,     KC_7,     KC_8,     KC_9,     KC_0,     XXXXXXX,
-    _______,  OSM_LALT, OSM_LGUI, OSM_LCTL, OSM_LSFT, XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  OSM_RSFT, OSM_RCTL, OSM_RGUI, OSM_LALT, _______,
-    _______,  _______,  _______,  _______,  _______,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                                                      _______,  _______,       _______,  _______,
-                                                                _______,       _______,
-                                            _______,  _______,  _______,       _______,  _______,  _______
+[NUM] = LAYOUT_ergodox_pretty(
+    KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   XXXXXXX,       XXXXXXX,  KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,
+    _______,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,       XXXXXXX,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  DV_QUES,
+    _______,LALT_T(KC_1),LGUI_T(KC_2),LSFT_T(KC_3),LCTL_T(KC_4), KC_5,            KC_6,RCTL_T(KC_7),RSFT_T(KC_8),RGUI_T(KC_9),LALT_T(KC_0),DV_UNDS,
+    DV_PLUS,  DV_COLN,  DV_GRV,   DV_TILD,  DV_LCBR,  DV_LBRC,  XXXXXXX,       XXXXXXX,  DV_RBRC,  DV_RCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_PIPE,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                                      XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,
+                                                                XXXXXXX,       XXXXXXX,
+                                            _______,  _______,  XXXXXXX,       XXXXXXX,  KC_DEL,   _______
 ),
 /* Media
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |  F13 |  F14 |  F15 |  F16 |  F17 |  F18 |           |  F19 |  F20 |  F21 |  F22 |  F23 |  F24 |        |
+ * |  Mute  | Vol- | Vol+ |      |      |      |      |           |      |      |  Ins | PrScr|      |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        | Mute | Vol- | Vol+ | Pst  | Copy |      |           |      | PgUp | Home |  Up  | End  |      |        |
+ * |        | Play | Stop | Prev | Next |      |      |           |      | PgUp | Home |  Up  | End  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | Play | Stop | Prev | Next | Ins  |------|           |------| PgDn | Left | Down | Rght |      |        |
+ * |        |      |      |      |      |      |------|           |------| PgDn | Left | Down | Rght |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | LAlt | LGui | LCtrl| LShft| Del  |      |           |      |      | RShft| RCtrl| RGui | LAlt |        |
+ * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -134,46 +124,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-[Media] = LAYOUT_ergodox_pretty(
-    XXXXXXX,  KC_MUTE,  KC_VOLD,  KC_VOLU,  KC_MPLY,  KC_MPRV,  KC_MNXT,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_PASTE, KC_COPY,  XXXXXXX,       XXXXXXX,  KC_PGUP,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_UNDO,  KC_INS,                            KC_PGDN,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
-    _______,  OSM_LALT, OSM_LGUI, OSM_LCTL, OSM_LSFT, KC_DEL,   XXXXXXX,       XXXXXXX,  XXXXXXX,  OSM_RSFT, OSM_RCTL, OSM_RGUI, OSM_LALT, XXXXXXX,
-    _______,  _______,  _______,  _______,  _______,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
-                                                      _______,  XXXXXXX,       XXXXXXX,  XXXXXXX,
+[ARR] = LAYOUT_ergodox_pretty(
+    KC_MUTE,  KC_VOLD,  KC_VOLU,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_INS,   KC_PSCR,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    _______,  KC_MPLY,  KC_MSTP,  KC_MPRV,  KC_MNXT,  XXXXXXX,  XXXXXXX,       XXXXXXX,  KC_PGUP,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                           KC_PGDN,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+                                                      XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,
                                                                 XXXXXXX,       XXXXXXX,
-                                            _______,  _______,  _______,       _______,  _______,  _______
-),
-/* NumPad & Arrows
- *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |        |      | PrScr| ScLck| Break|      |      |           |      |  (   | NmLck|  /   |  *   |  -   |   (    |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |        |      | Home |  Up  |  End | PgUp |      |           |      |  )   |  7   |  8   |  9   |  +   |   )    |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      | Left | Down | Right| PgDn |------|           |------|      |  4   |  5   |  6   |  =   |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        | LAlt | LGui | LCtrl| LShft|      |      |           |      |      |  1   |  2   |  3   |Enter |        |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      |      |      |      |                                       |  0   | 000  |  .   |  ,   |      |
- *   `----------------------------------'                                       `----------------------------------'
- *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |      |
- *                                 ,------|------|------|       |------+------+------.
- *                                 |      |      |      |       |      |      |      |
- *                                 |      |      |------|       |------|      |      |
- *                                 |      |      |      |       |      |      |      |
- *                                 `--------------------'       `--------------------'
- */
-[NumPad] = LAYOUT_ergodox(
-    XXXXXXX,    XXXXXXX,    KC_PSCR,    KC_SCRL,    KC_PAUS,    XXXXXXX,    XXXXXXX,       XXXXXXX,    KC_LPRN,    KC_NUM,     KC_PSLS,    KC_PAST,    KC_PMNS,    KC_LPRN,
-    XXXXXXX,    XXXXXXX,    KC_HOME,    KC_UP,      KC_END,     KC_PGUP,    XXXXXXX,       XXXXXXX,    KC_RPRN,    KC_KP_7,    KC_KP_8,    KC_KP_9,    KC_PPLS,    KC_RPRN,
-    _______,    XXXXXXX,    KC_LEFT,    KC_DOWN,    KC_RGHT,    KC_PGDN,                               XXXXXXX,    KC_KP_4,    KC_KP_5,    KC_KP_6,    KC_PEQL,    XXXXXXX,
-    _______,    OSM_RSFT,   OSM_RCTL,   OSM_RGUI,   OSM_LALT,   XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    KC_KP_1,    KC_KP_2,    KC_KP_3,    KC_PENT,    _______,
-    _______,    _______,    _______,    _______,    _______,                                                       KC_KP_0,    KC_P000,    KC_PDOT,    KC_PCMM,    _______,
-                                                                _______,    XXXXXXX,       XXXXXXX,    XXXXXXX,
-                                                                            XXXXXXX,       XXXXXXX,
-                                                    _______,    _______,    _______,       _______,    _______,    _______
+                                            _______,  _______,  XXXXXXX,       XXXXXXX,  _______,  _______
 ),
 /* System
  *
@@ -196,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 |      |      |      |       |      |      |      |
  *                                 `--------------------'       `--------------------'
  */
-[NumPad] = LAYOUT_ergodox(
+[System] = LAYOUT_ergodox(
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    QK_RBT,     XXXXXXX,    XXXXXXX,
     XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,                               DB_TOGG,    XXXXXXX,    XXXXXXX,    XXXXXXX,    AS_TOGG,    XXXXXXX,
@@ -218,15 +177,7 @@ bool check_mods(uint8_t mods) {
 };
 
 bool is_any_mods_or_layers(void) {
-    return (bool)(
-        get_weak_mods() |
-        get_oneshot_mods() |
-        get_oneshot_locked_mods() |
-        get_mods() |
-        layer_state_is(Symbols) |
-        layer_state_is(Media) |
-        layer_state_is(NumPad)
-    );
+    return (bool)(get_weak_mods() | get_oneshot_mods() | get_oneshot_locked_mods() | get_mods() | layer_state_is(NUM) | layer_state_is(ARR));
 }
 
 void clear_all_mods(void) {
@@ -238,17 +189,11 @@ void clear_all_mods(void) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case KC_P000:
-            if (record->event.pressed) {
-                SEND_STRING(SS_TAP(X_KP_0) SS_TAP(X_KP_0) SS_TAP(X_KP_0));
-            }
-            return false;
         case KC_ESC:
             if (is_any_mods_or_layers()) {
                 clear_all_mods();
-                layer_off(Symbols);
-                layer_off(Media);
-                layer_off(NumPad);
+                layer_off(NUM);
+                layer_off(ARR);
                 reset_oneshot_layer();
                 return false;
             }
@@ -258,8 +203,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 // Runs just one time when the keyboard initializes.
-void keyboard_post_init_user(void) {
-}
+void keyboard_post_init_user(void) {}
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
