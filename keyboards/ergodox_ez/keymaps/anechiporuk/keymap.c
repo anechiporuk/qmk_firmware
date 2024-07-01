@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
-
 #include "version.h"
 #include "keymap_dvorak.h"
 
@@ -44,15 +43,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* QWERTY Layer for DVORAK layout
  *
  *  ,--------------------------------------------------.                 ,--------------------------------------------------.
- *  |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |      |                 |      |  F7  |  F8  |  F9  |  F10 |  F11 |   F12  |
+ *  |   F1   |  F2  |  F3  |  F4  |  F5  |  F6  |  {   |                 |   }  |  F7  |  F8  |  F9  |  F10 |  F11 |   F12  |
  *  |--------+------+------+------+------+-------------|                 |------+------+------+------+------+------+--------|
- *  |   Tab  |  '"  |  ,<  |  .>  |   P  |   Y  |      |                 |      |   F  |   G  |   C  |   R  |   L  |   /    |
+ *  |   Tab  |  '"  |  ,<  |  .>  |   P  |   Y  |  [   |                 |   ]  |   F  |   G  |   C  |   R  |   L  |   /    |
  *  |--------+------+------+------+------+------|      |                 |      |------+------+------+------+------+--------|
  *  |   Esc  | LA_A | LG_O | LC_E | LS_U |   I  |------|                 |------|   D  | RS_H | RC_T | RG_N | LA_S |   -    |
- *  |--------+------+------+------+------+------|      |                 |      |------+------+------+------+------+--------|
+ *  |--------+------+------+------+------+------|  (   |                 |   )  |------+------+------+------+------+--------|
  *  |    =   |   ;  |   Q  |   J  |   K  |   X  |      |                 |      |   B  |   M  |   W  |   V  |   Z  |   \    |
  *  `--------+------+------+------+------+-------------'                 `-------------+------+------+------+------+--------'
- *    |      |      |      |      |      |                                             |      |      |      |      |      |
+ *    | LCtl |      |      |      |      |                                             |      |      |      |      | RCtl |
  *    `----------------------------------'                                             `----------------------------------'
  *                                        ,-------------.               ,-------------.
  *                                        |      |      |               |      |      |
@@ -63,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'               `--------------------'
  */
 [BASE] = LAYOUT_ergodox_pretty(
-    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    XXXXXXX,        XXXXXXX,  KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
-    KC_TAB,   DV_QUOT,  DV_COMM,  DV_DOT,   DV_P,     DV_Y,     XXXXXXX,        XXXXXXX,  DV_F,     DV_G,     DV_C,     DV_R,     DV_L,     DV_SLSH,
+    KC_F1,    KC_F2,    KC_F3,    KC_F4,    KC_F5,    KC_F6,    DV_LCBR,        DV_RCBR,  KC_F7,    KC_F8,    KC_F9,    KC_F10,   KC_F11,   KC_F12,
+    KC_TAB,   DV_QUOT,  DV_COMM,  DV_DOT,   DV_P,     DV_Y,     DV_LBRC,        DV_RBRC,  DV_F,     DV_G,     DV_C,     DV_R,     DV_L,     DV_SLSH,
     KC_ESC,   HOME_A,   HOME_O,   HOME_E,   HOME_U,   DV_I,                               DV_D,     HOME_H,   HOME_T,   HOME_N,   HOME_S,   DV_MINS,
-    DV_EQL,   DV_SCLN,  DV_Q,     DV_J,     DV_K,     DV_X,     XXXXXXX,        XXXXXXX,  DV_B,     DV_M,     DV_W,     DV_V,     DV_Z,     DV_BSLS,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    DV_EQL,   DV_SCLN,  DV_Q,     DV_J,     DV_K,     DV_X,     KC_LPRN,        KC_RPRN,  DV_B,     DV_M,     DV_W,     DV_V,     DV_Z,     DV_BSLS,
+    KC_LCTL,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                                XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  KC_RCTL,
                                                       XXXXXXX,  XXXXXXX,        XXXXXXX,  XXXXXXX,
                                                                 XXXXXXX,        XXXXXXX,
                                 LT(NUM,KC_SPC),LT(ARR,XXXXXXX), XXXXXXX,        XXXXXXX,  LT(ARR,KC_BSPC),LT(NUM,KC_ENT)
@@ -94,11 +93,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'         `--------------------'
  */
 [NUM] = LAYOUT_ergodox_pretty(
-    KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   XXXXXXX,       XXXXXXX,  KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,
-    _______,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  XXXXXXX,       XXXXXXX,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  DV_QUES,
+    KC_F13,   KC_F14,   KC_F15,   KC_F16,   KC_F17,   KC_F18,   _______,       _______,  KC_F19,   KC_F20,   KC_F21,   KC_F22,   KC_F23,   KC_F24,
+    _______,  KC_EXLM,  KC_AT,    KC_HASH,  KC_DLR,   KC_PERC,  _______,       _______,  KC_CIRC,  KC_AMPR,  KC_ASTR,  KC_LPRN,  KC_RPRN,  DV_QUES,
     _______,LALT_T(KC_1),LGUI_T(KC_2),LSFT_T(KC_3),LCTL_T(KC_4), KC_5,            KC_6,RCTL_T(KC_7),RSFT_T(KC_8),RGUI_T(KC_9),LALT_T(KC_0),DV_UNDS,
-    DV_PLUS,  DV_COLN,  DV_GRV,   DV_TILD,  DV_LCBR,  DV_LBRC,  XXXXXXX,       XXXXXXX,  DV_RBRC,  DV_RCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_PIPE,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    DV_PLUS,  DV_COLN,  DV_GRV,   DV_TILD,  DV_LCBR,  DV_LBRC,  _______,       _______,  DV_RBRC,  DV_RCBR,  XXXXXXX,  XXXXXXX,  XXXXXXX,  DV_PIPE,
+    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  _______,
                                                       XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,
                                                                 XXXXXXX,       XXXXXXX,
                                             _______,  _______,  XXXXXXX,       XXXXXXX,  KC_DEL,   _______
@@ -106,13 +105,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Media
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |  Mute  | Vol- | Vol+ |      |      |      |      |           |      |      |  Ins | PrScr|      |      |        |
+ * |  Mute  | Vol- | Vol+ |      |      |      |      |           |      |      |  Ins | PrScr| Del  |      |        |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
  * |        | Play | Stop | Prev | Next |      |      |           |      | PgUp | Home |  Up  | End  |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |------|           |------| PgDn | Left | Down | Rght |      |        |
+ * |        | LAlt | LWin | LSft | LCtl |      |------|           |------| PgDn | Left | Down | Rght |      |        |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |        |      |      |      |      |      |      |           |      |      |      |      |      |      |        |
+ * |        |      |      |      |      |      |      |           |      | App  |      |      |      |      |        |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      |      |      |      |                                       |      |      |      |      |      |
  *   `----------------------------------'                                       `----------------------------------'
@@ -125,10 +124,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `--------------------'
  */
 [ARR] = LAYOUT_ergodox_pretty(
-    KC_MUTE,  KC_VOLD,  KC_VOLU,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_INS,   KC_PSCR,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    KC_MUTE,  KC_VOLD,  KC_VOLU,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  KC_INS,   KC_PSCR,  KC_DEL,   XXXXXXX,  XXXXXXX,
     _______,  KC_MPLY,  KC_MSTP,  KC_MPRV,  KC_MNXT,  XXXXXXX,  XXXXXXX,       XXXXXXX,  KC_PGUP,  KC_HOME,  KC_UP,    KC_END,   XXXXXXX,  XXXXXXX,
-    _______,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                           KC_PGDN,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
-    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
+    _______,  KC_LALT,  KC_LWIN,  KC_LSFT,  KC_LCTL,  XXXXXXX,                           KC_PGDN,  KC_LEFT,  KC_DOWN,  KC_RGHT,  XXXXXXX,  XXXXXXX,
+    XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,       XXXXXXX,  KC_APP,   XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
     XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,                                               XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,  XXXXXXX,
                                                       XXXXXXX,  XXXXXXX,       XXXXXXX,  XXXXXXX,
                                                                 XXXXXXX,       XXXXXXX,
